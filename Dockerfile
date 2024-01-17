@@ -1,8 +1,8 @@
-FROM php:8.1-fpm
+FROM php:7.4-fpm
 
-# set your user name, ex: user=bernardo
-ARG user=carlos
-ARG uid=1000
+# Arguments defined in docker-compose.yml
+ARG user
+ARG uid
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
@@ -35,8 +35,5 @@ RUN pecl install -o -f redis \
 
 # Set working directory
 WORKDIR /var/www
-
-# Copy custom configurations PHP
-COPY docker/php/custom.ini /usr/local/etc/php/conf.d/custom.ini
 
 USER $user
